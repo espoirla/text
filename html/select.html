@@ -1,0 +1,167 @@
+<html>
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            text-decoration: none;
+            list-style: none;
+        }
+        
+        .select {
+            width: 300px;
+            height: 30px;
+            background: green;
+        }
+        
+        .select ul li {
+            float: left;
+            width: 98px;
+            line-height: 30px;
+            text-align: center;
+            border-left: 1px solid #cccccc;
+            border-right: 1px solid #cccccc;
+        }
+        
+        .main {
+            width: 300px;
+            height: 300px;
+            background: blue;
+        }
+        
+        .special {
+            background: pink;
+        }
+        
+        .special1 {
+            cursor: pointer;
+        }
+        
+        .main div {
+            display: none;
+        }
+        
+        .top {
+            position: fixed;
+            top: 400px;
+            left: 1004px;
+            background: red;
+            width: 50px;
+            height: 50px;
+            display: none;
+        }
+        
+        .div1 {
+            width: 90px;
+            height: 20px;
+            text-align: center;
+            line-height: 20px;
+            border: 1px solid #ccc;
+            position: relative;
+        }
+        
+        .div1 span {
+            cursor: pointer;
+            width: 100%;
+            position: absolute;
+            left: 0;
+        }
+        
+        .icon {
+            display: inline-block;
+            width: 14px;
+            height: 8px;
+            background: url(all0119.png) -500px 0 no-repeat;
+            position: absolute;
+            top: 8px;
+            left: 72px;
+        }
+        
+        .div1 ul {
+            border: 1px solid #ccc;
+            position: absolute;
+            left: -1px;
+            top: 20px;
+            width: 100%;
+            cursor: pointer;
+            display: none;
+        }
+        
+        .div1 ul li:hover {
+            background: #f0f0f0;
+        }
+        
+        .div1.active,
+        .div1.active ul {
+            border-color: #f60;
+        }
+    </style>
+</head>
+
+<body style="height:2005px;">
+    <div class="select">
+        <ul>
+            <li>选项卡1</li>
+            <li>选项卡2</li>
+            <li>选项卡3</li>
+        </ul>
+    </div>
+    <div class="main">
+        <div>内容1</div>
+        <div>内容2</div>
+        <div>内容3</div>
+    </div>
+    <div class="top">top</div>
+    <div class="div1" id="div1">
+        <span>
+            <k></k>
+        <i class="icon"></i></span>
+        <ul>
+            <li>列表1</li>
+            <li>列表2</li>
+            <li>列表3</li>
+            <li>列表4</li>
+        </ul>
+    </div>
+</body>
+<script src="../js/jquery.js"></script>
+<script src="../js/xiala.js"></script>
+<script>
+    var curindex = 0;
+
+    function open() {
+
+        $(".select ul li").eq(curindex).addClass("special").siblings().removeClass("special");
+    }
+
+    function none() {
+        $(".main").children("div").eq(curindex).show().siblings().hide();
+    }
+    open();
+    none();
+    $(".select").on("click", "ul>li", function(ev) {
+        ev.stopPropagation()
+        curindex = $(this).index();
+        open();
+        none();
+    })
+    $(".top").on("click", function() {
+        $("html, body").animate({
+            scrollTop: 0
+        })
+    })
+
+    $(window).on("scroll", function() {
+        t = $("html").scrollTop() || $("body").scrollTop();
+        if (t >= 400)
+            $(".top").fadeIn();
+        else
+            $(".top").fadeOut();
+    })
+    Function("div1")
+</script>
+
+</html>
